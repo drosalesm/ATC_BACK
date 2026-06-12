@@ -2,10 +2,19 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 # Cambia esta URL con tus credenciales de PostgreSQL
-DATABASE_URL = "postgresql://postgres:123@localhost:5432/atc_app"
+#DATABASE_URL = "postgresql://postgres:123@localhost:5432/atc_app"  # esto era para posgresql
+DATABASE_URL = "sqlite:///./atc_app.db"
+
+
 
 # Crea el motor
-engine = create_engine(DATABASE_URL)
+#engine = create_engine(DATABASE_URL)    # esto era para posgresql
+
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={"check_same_thread": False}
+)
+
 
 # Crea la sesión
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

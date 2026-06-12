@@ -5,6 +5,16 @@ from app.routers import auth, categories,products,company #,customer,taxes,waitl
 from fastapi.responses import JSONResponse
 #from app.middleware.logging_middleware import log_request_response
 from fastapi.middleware.cors import CORSMiddleware
+from app.db.database import Base, engine
+
+
+# Imports de modelos — necesarios para que create_all los detecte
+from app.models.products import Product, Category
+from app.models.users import User
+from app.models.company import Company
+Base.metadata.create_all(bind=engine)
+
+
 
 app = FastAPI()
 
